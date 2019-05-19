@@ -13,7 +13,6 @@ protected:
 public:
   void event_loop();
   void register_w(Widget *);
-  virtual void message(std::string m) = 0;
   virtual ~Window();
 };
 

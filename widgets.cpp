@@ -4,10 +4,8 @@
 using namespace genv;
 
 
-Widget::Widget(Window *window, int x, int y, int sx, int sy) : _x(x), _y(y), _size_x(sx), _size_y(sy)
-{
-  window->register_w(this);
-}
+Widget::Widget(int x, int y, int sx, int sy) : _x(x), _y(y), _size_x(sx), _size_y(sy)
+{}
 
 bool Widget::is_selected(int mouse_x, int mouse_y)
 {

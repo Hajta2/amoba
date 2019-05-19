@@ -10,14 +10,14 @@ class GameLogic;
 class Game;
 
 
-class Buttons: public Widget
+class Button: public Widget
 {
 protected:
     bool pushed=false;
     std::string name;
     bool showing=false;
 public:
-  Buttons (int x, int y, int sx, int sy,std::string _name): Widget(x,y,sx,sy), name(_name){};
+  Button (int x, int y, int sx, int sy,std::string _name): Widget(x,y,sx,sy), name(_name){};
   void draw() override;
   void handle(genv::event ev) override;
   std::string getValue() {return name;}
@@ -45,7 +45,7 @@ protected:
     Game * game;
 public:
     GameButton(int x,int y,int sx, int sy,std::string _name,GameLogic * _logic):Button(x,y,sx,sy,_name),logic(_logic){};
-    void changeName(std::newName);
+    void changeName(std::string newName);
     void draw();
     void handle(genv::event ev);
     int whichLine();

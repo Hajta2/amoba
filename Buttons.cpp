@@ -9,13 +9,13 @@ void NavigationButton::draw()
     gout << move_to(_x,_y) ;
     gout<< color(0,0,0) ;
     gout<< box(_size_x,_size_y) ;
-    gout<< move_to(x+3,y+gout.cdescent()+gout.cdescent()+5) ;
+    gout<< move_to(_x+3,_y+gout.cdescent()+gout.cdescent()+5) ;
     gout<< color(255,255,255) << text(name);
     showing=true;
 }
 void NavigationButton::handle(genv::event ev)
 {
-    if((is_selected(ev.pos_x,ev.pos_y) || ev.keycode==keycode)
+    if((is_selected(ev.pos_x,ev.pos_y) || ev.keycode==keycode))
     {
         action();
         focused=true;
@@ -29,16 +29,11 @@ void NavigationButton::handle(genv::event ev)
 void GameButton::draw()
 {
     using namespace genv;
-    gout << move_to(_x,_X) ;
+    gout << move_to(_x,_y) ;
     gout<< color(255,250,250) ;
     gout<< box(_size_x,_size_y) ;
-    gout<< move_to(x+3,y+gout.cdescent()+gout.cdescent()+5) ;
+    gout<< move_to(_x+3,_y+gout.cdescent()+gout.cdescent()+5) ;
     gout<< color(0,0,0) << text(name);
-}
-
-void GameButton::changeName(std::string _newName)
-{
-    name=_newName;
 }
 
 void GameButton::changeName(std::string _newName)

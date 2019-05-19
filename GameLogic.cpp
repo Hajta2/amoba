@@ -1,11 +1,13 @@
 #include "GameLogic.hpp"
 
-int state(int i, int j)
+
+
+int GameLogic::state(int i, int j)
 {
-    return stateOfField[i][j];
+    return StateOfField[i][j];
 };
 
-bool GameLogic::changeState(int i, int j)
+void GameLogic::changeState(int i, int j)
 {
     if (state(i,j)==0)
     {
@@ -151,11 +153,11 @@ bool GameLogic::isFull()
 
 void GameLogic::newGame()
 {
-    for(int i=0; i<sizeOfField; i++)
+    for(int i=0; i<SizeOfField; i++)
     {
-        for(int j=0; j<sizeOfField; j++)
+        for(int j=0; j<SizeOfField; j++)
         {
-            stateOfField[i][j]=0;
+            StateOfField[i][j]=0;
         }
     }
 }

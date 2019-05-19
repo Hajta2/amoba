@@ -1,20 +1,22 @@
 #ifndef GAMELOGIC_HPP
 #define GAMELOGIC_HPP
 
-
+#include "Game.hpp"
+class Game;
 class GameLogic
 {
-    protected:
-        const unsigned max_X=300;
-        const unsigned max_Y=300;
-        const int gridSize=max_X/sizeOfField;
+        const unsigned max_X=600;
+        const unsigned max_Y=600;
+        const int gridSize=max_X/SizeOfField;
         static const int SizeOfField=15;
         const int ForTheWin=5;
         int StateOfField[SizeOfField][SizeOfField]={};
         int player=1;
         int stepsMade=0;
+        Game * game;
 
     public:
+        GameLogic(Game * _game):game(_game){};
         int state(int i,int j);
         void changeState(int i,int j);
         bool ValidStep(int i,int j);
@@ -23,11 +25,9 @@ class GameLogic
         bool InAColumn(int x);
         void newGame();
         bool isFull();
-
+        bool won();
         void switchPlayer ();
         int whichPlayer () {return player;};
-        virtual bool won() {return false;};
-        virtual bool validStep(int i, int j) {return false;};
         void stepMade() {stepsMade++;};
 };
 
