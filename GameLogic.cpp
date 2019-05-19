@@ -1,13 +1,11 @@
 #include "GameLogic.hpp"
 
-
-
 int GameLogic::state(int i, int j)
 {
     return StateOfField[i][j];
 };
 
-void GameLogic::changeState(int i, int j)
+void GameLogic::changeState(int player,int i, int j)
 {
     if (state(i,j)==0)
     {
@@ -121,13 +119,12 @@ bool GameLogic::Across(int x)
 
 bool GameLogic::won()
 {
-    if(stepsMade<ForTheWin*2-1) //ha még nem történt ennyi lépés összesen, akkor még senki nem gyõzhetett
-    {
+    if(stepsMade<ForTheWin*2-1){
         return false;
     }
     if(Across(ForTheWin) || InAColumn(ForTheWin) || InARow(ForTheWin))
     {
-        newGame(); //lenullazom a state matrixot
+        newGame();
         return true;
     }
     else

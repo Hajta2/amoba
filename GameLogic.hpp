@@ -18,7 +18,7 @@ class GameLogic
     public:
         GameLogic(Game * _game):game(_game){};
         int state(int i,int j);
-        void changeState(int i,int j);
+        void changeState(int player,int i,int j);
         bool ValidStep(int i,int j);
         bool InARow(int x);
         bool Across(int x);

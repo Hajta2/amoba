@@ -1,6 +1,5 @@
 #ifndef GAME_HPP
 #define GAME_HPP
-#include<vector>
 
 #include "window.hpp"
 #include "GameLogic.hpp"
@@ -21,7 +20,6 @@ class Game : public Window {
 
 public:
     virtual void OpeningScreen() {};
-    virtual void openGame() {};
     virtual void exit() {};
     virtual void endScreen() {};
     virtual void eventLoop() {};

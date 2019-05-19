@@ -13,9 +13,6 @@ protected:
   genv::event ev;
 
 public:
-  void event_loop();
-  void register_w(Widget *);
-  virtual ~Window();
 };
 
 

@@ -20,14 +20,12 @@ public:
   Button (int x, int y, int sx, int sy,std::string _name): Widget(x,y,sx,sy), name(_name){};
   void draw() override{};
   void handle(genv::event ev) override{};
-  std::string getValue() {return name;}
 };
 
 class NavigationButton:public Button{
 protected:
     std::function<void()> funct;
     int keycode;
-    bool focused;
 public:
     NavigationButton(int x,int y,int sx,int sy,std::string _name,std::function<void()> _f,int _key):Button(x,y,sx,sy,_name), funct(_f),keycode(_key){};
     void action()
@@ -35,22 +33,9 @@ public:
         showing=false;
         funct();
     }
-    void draw() override;
-    void handle(genv::event ev) override;
-};
-
-class GameButton:public Button{
-protected:
-    GameLogic * logic;
-    Game * game;
-public:
-    GameButton(int x,int y,int sx, int sy,std::string _name,GameLogic * _logic):Button(x,y,sx,sy,_name),logic(_logic){};
-    void changeName(std::string newName);
     void draw();
     void handle(genv::event ev);
-    int whichLine();
-    int whichColumn();
-
 };
+
 
 #endif // BUTTONS_HPP

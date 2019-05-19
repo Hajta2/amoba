@@ -11,8 +11,7 @@ class Text: public Widget
     public:
         Text(int x,int y, int sx, int sy,std::string _text);
         void draw() override;
-        void handle(genv::event ev) override;
-        std::string GetValue();
+        void handle(genv::event ev) override{};
 };
 
 #endif // TEXT_HPP

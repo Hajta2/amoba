@@ -7,9 +7,16 @@ using namespace genv;
 Widget::Widget(int x, int y, int sx, int sy) : _x(x), _y(y), _size_x(sx), _size_y(sy)
 {}
 
-bool Widget::is_selected(int mouse_x, int mouse_y)
+bool Widget::isFocused(genv::event ev)
 {
-    return mouse_x>_x && mouse_x<_x+_size_x && mouse_y>_y && mouse_y<_y+_size_y;
+    if (ev.type==ev_mouse)
+    {
+        if(ev.pos_x>=_x && ev.pos_x<=_x+_size_x && ev.pos_y>=_y && ev.pos_y<=_y+_size_y && ev.button==btn_left && !focused)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 
