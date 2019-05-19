@@ -1,23 +1,83 @@
 #include "Buttons.hpp"
 
+
 using namespace genv;
 
-Buttons::Buttons(Window *w, int x, int y, int sx, int sy):
-  Widget(w, x, y, sx, sy) {}
-
-void Buttons::draw() {
-  gout << move_to(_x, _y) << color(90,60,90) << box(_size_x, _size_y);
+void NavigationButton::draw()
+{
+    using namespace genv;
+    gout << move_to(_x,_y) ;
+    gout<< color(0,0,0) ;
+    gout<< box(_size_x,_size_y) ;
+    gout<< move_to(x+3,y+gout.cdescent()+gout.cdescent()+5) ;
+    gout<< color(255,255,255) << text(name);
+    showing=true;
+}
+void NavigationButton::handle(genv::event ev)
+{
+    if((is_selected(ev.pos_x,ev.pos_y) || ev.keycode==keycode)
+    {
+        action();
+        focused=true;
+    }
+    else
+    {
+        focused=false;
+    }
 }
 
-void Buttons::handle(event ev) {
-  if(ev.type == ev_mouse && ev.button == btn_left) {
-    action();
-  }
+void GameButton::draw()
+{
+    using namespace genv;
+    gout << move_to(_x,_X) ;
+    gout<< color(255,250,250) ;
+    gout<< box(_size_x,_size_y) ;
+    gout<< move_to(x+3,y+gout.cdescent()+gout.cdescent()+5) ;
+    gout<< color(0,0,0) << text(name);
 }
 
+void GameButton::changeName(std::string _newName)
+{
+    name=_newName;
+}
 
-FunctorButton::FunctorButton(Window *w,int x,int y,int sx,int sy,std::function<void()> _fv):Buttons(w,x,y,sx,sy), fv(_fv){}
+void GameButton::changeName(std::string _newName)
+{
+    name=_newName;
+}
 
-void FunctorButton::action(){
-fv();
+void GameButton::eventHandler(genv::event ev)
+{
+    if(logic->whichPlayer()==1 && is_selected(ev.pos_x,ev.pos_y )
+    {
+        changeName("X");
+    }
+    else if(logic->whichPlayer()==2 && is_selected(ev.pos_x,ev.pos_y ) )
+    {
+        changeName("O");
+    }
+    else
+    {
+        return;
+    }
+    draw();
+    logic->changeState(whichLine(),whichColumn());
+    logic->stepMade();
+    if(logic->won())
+    {
+        game->endScreen();
+    }
+    logic->switchPlayer();
+    gout << refresh;
+
+}
+
+int GameButton::whichLine()
+{
+    return y/game->gridWidth();
+}
+
+int GameButton::whichColumn()
+{
+    return x/game->gridWidth();
 }

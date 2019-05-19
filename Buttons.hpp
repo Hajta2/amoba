@@ -3,24 +3,54 @@
 
 #include "widgets.hpp"
 #include <functional>
+#include "GameLogic.hpp"
+#include "Game.hpp"
+
+class GameLogic;
+class Game;
 
 
 class Buttons: public Widget
 {
+protected:
+    bool pushed=false;
+    std::string name;
+    bool showing=false;
 public:
-  Buttons(Window *w, int x, int y, int sx, int sy);
+  Buttons (int x, int y, int sx, int sy,std::string _name): Widget(x,y,sx,sy), name(_name){};
   void draw() override;
   void handle(genv::event ev) override;
-  virtual void action() = 0;
+  std::string getValue() {return name;}
 };
 
-class FunctorButton: public Buttons{
-std::function<void()> fv;
+class NavigationButton:public Button{
+protected:
+    std::function<void()> funct;
+    int keycode;
+    bool focused;
 public:
-    FunctorButton(Window *w,int x,int y,int sx,int sy, std::function<void()> _fv);
-    void action() override;
+    NavigationButton(int x,int y,int sx,int sy,std::string _name,std::function<void()> _f,int _key):Button(x,y,sx,sy,_name), funct(_f),keycode(_key){};
+    void action()
+    {
+        showing=false;
+        funct();
+    }
+    void draw() override;
+    void handle(genv::event ev) override;
 };
 
+class GameButton:public Button{
+protected:
+    GameLogic * logic;
+    Game * game;
+public:
+    GameButton(int x,int y,int sx, int sy,std::string _name,GameLogic * _logic):Button(x,y,sx,sy,_name),logic(_logic){};
+    void changeName(std::newName);
+    void draw();
+    void handle(genv::event ev);
+    int whichLine();
+    int whichColumn();
 
+};
 
 #endif // BUTTONS_HPP

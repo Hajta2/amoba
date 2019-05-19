@@ -2,16 +2,23 @@
 #define GAME_HPP
 
 
-#include "widgets.hpp"
+#include "window.hpp"
+#include "GameLogic.hpp"
+#include "Text.hpp"
 
-
-
-    class Game : public Window {
+class GameLogic;
+class Game : public Window {
+    GameLogic*logic;
+    bool gameGoing=false;
+    bool wantToExit=false;
 
 public:
-  Game();
-  void asd();
-  void message(std::string msg) override;
+    virtual void OpeningScreen() {};
+    virtual void openGame() {};
+    virtual void exit() {};
+    virtual void endScreen() {};
+    virtual void eventLoop() {};
+    virtual void newGame() {};
 };
 
 #endif // GAME_HPP
