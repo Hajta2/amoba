@@ -18,8 +18,8 @@ protected:
     bool showing=false;
 public:
   Button (int x, int y, int sx, int sy,std::string _name): Widget(x,y,sx,sy), name(_name){};
-  void draw() override;
-  void handle(genv::event ev) override;
+  void draw() override{};
+  void handle(genv::event ev) override{};
   std::string getValue() {return name;}
 };
 

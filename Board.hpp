@@ -2,10 +2,12 @@
 #define BOARD_HPP
 
 #include "Game.hpp"
-
+#include "Buttons.hpp"
 
 
 class Board: public Game{
+    std::vector<NavigationButton*> navig;
+    GameLogic * logic;
     public:
         Board();
         void OpeningScreen();

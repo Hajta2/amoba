@@ -41,9 +41,9 @@ void GameButton::changeName(std::string _newName)
     name=_newName;
 }
 
-void GameButton::eventHandler(genv::event ev)
+void GameButton::handle(genv::event ev)
 {
-    if(logic->whichPlayer()==1 && is_selected(ev.pos_x,ev.pos_y )
+    if(logic->whichPlayer()==1 && is_selected(ev.pos_x,ev.pos_y ))
     {
         changeName("X");
     }
@@ -69,10 +69,10 @@ void GameButton::eventHandler(genv::event ev)
 
 int GameButton::whichLine()
 {
-    return y/game->gridWidth();
+    return _y/game->gridWidth();
 }
 
 int GameButton::whichColumn()
 {
-    return x/game->gridWidth();
+    return _x/game->gridWidth();
 }
