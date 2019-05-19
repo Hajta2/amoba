@@ -7,8 +7,10 @@
 
 
     class Game : public Window {
+
 public:
   Game();
+  void asd();
   void message(std::string msg) override;
 };
 
